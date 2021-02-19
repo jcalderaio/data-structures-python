@@ -1,37 +1,37 @@
+# LIFO Stack implementation using a Python list as
+# its underlying storage.
 class StackADT:
-    # LIFO Stack implementation using a Python list as
-    # its underlying storage.
+    # Create an empty stack.
     def __init__(self):
-        # Create an empty stack.
         self.data = []
 
-    def len(self):
-        # Return the number of elements in the stack.
-        return len(self.data)
-
-    def is_empty(self):
-        # Return True if the stack is empty.
-        return len(self.data) == 0
-
+    # Add element e to the top of the stack
     def push(self, e):
-        # Add element e to the top of the stack
         self.data.append(e)
 
-    def top(self):
-        # Return (but do not remove) the element at the top of
-        # the stack. Raise Empty exception if the stack is empty.
+    # Remove and return the element from the top of the stack
+    # (i.e., LIFO). Raise exception if the stack is empty.
+    def pop(self):
+        if self.is_empty():
+            raise IndexError('Stack is empty')
+        else:
+            return self.data.pop()
+
+    # Return (but do not remove) the element at the top of
+    # the stack. Raise Empty exception if the stack is empty.
+    def peek(self):
         if self.is_empty():
             raise IndexError('Stack is empty')
         else:
             return self.data[-1]
 
-    def pop(self):
-        # Remove and return the element from the top of the stack
-        # (i.e., LIFO). Raise Empty exception if the stack is empty.
-        if self.is_empty():
-            raise IndexError('Stack is empty')
-        else:
-            return self.data.pop()
+    # Return True if the stack is empty.
+    def is_empty(self):
+        return len(self.data) == 0
+
+    # Return the number of elements in the stack.
+    def size(self):
+        return len(self.data)
 
 
 S = StackADT()
@@ -40,14 +40,14 @@ S.push("T")
 S.push("A")
 S.push("C")
 S.push("K")
-S.top()       # K
-S.len()       # 5
-S.is_empty()  # False
-S.pop()       # K
-S.pop()       # C
-S.pop()       # A
-S.pop()       # T
-S.pop()       # S
-S.is_empty()  # True
-S.len()       # 0
-S.top()       # IndexError: Stack is empty
+S.peek()       # K
+S.size()       # 5
+S.is_empty()   # False
+S.pop()        # K
+S.pop()        # C
+S.pop()        # A
+S.pop()        # T
+S.pop()        # S
+S.is_empty()   # True
+S.size()       # 0
+S.peek()       # IndexError: Stack is empty

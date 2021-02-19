@@ -1,37 +1,37 @@
+# FIFO Queue implementation using a Python list as
+# its underlying storage.
 class QueueADT:
-    # FIFO Queue implementation using a Python list as
-    # its underlying storage.
+    # Create an empty queue.
     def __init__(self):
-        # Create an empty queue.
         self.data = []
 
-    def len(self):
-        # Return the number of elements in the queue.
-        return len(self.data)
-
-    def is_empty(self):
-        # Return True if the queue is empty.
-        return len(self.data) == 0
-
+    # Add element e to the back of the queue
     def enqueue(self, e):
-        # Add element e to the back of the queue
         self.data.insert(0, e)
 
-    def first(self):
-        # Return (but do not remove) the first element of the
-        # queue. Raise Empty exception if the queue is empty.
+    # Remove and return the element from the front of the queue
+    # (i.e., FIFO). Raise exception if the queue is empty.
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError('Queue is empty')
+        else:
+            return self.data.pop()
+
+    # Return (but do not remove) the first element of the
+    # queue. Raise exception if the queue is empty.
+    def peek(self):
         if self.is_empty():
             raise IndexError('Queue is empty')
         else:
             return self.data[-1]
 
-    def dequeue(self):
-        # Remove and return the element from the front of the queue
-        # (i.e., FIFO). Raise Empty exception if the queue is empty.
-        if self.is_empty():
-            raise IndexError('Queue is empty')
-        else:
-            return self.data.pop()
+    # Return True if the queue is empty.
+    def is_empty(self):
+        return len(self.data) == 0
+
+    # Return the number of elements in the queue.
+    def size(self):
+        return len(self.data)
 
 
 Q = QueueADT()
@@ -40,8 +40,8 @@ Q.enqueue("U")
 Q.enqueue("E")
 Q.enqueue("U")
 Q.enqueue("E")
-Q.first()        # Q
-Q.len()          # 5
+Q.peek()         # Q
+Q.size()         # 5
 Q.is_empty()     # False
 Q.dequeue()      # Q
 Q.dequeue()      # U
@@ -49,5 +49,5 @@ Q.dequeue()      # E
 Q.dequeue()      # U
 Q.dequeue()      # E
 Q.is_empty()     # True
-Q.len()          # 0
-Q.first()        # IndexError: Queue is empty
+Q.size()         # 0
+Q.peek()         # IndexError: Queue is empty
